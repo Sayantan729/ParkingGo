@@ -1,0 +1,151 @@
+<div
+  class="row justify-content-around"
+  style="background-color: rgb(0, 53, 102); margin: auto"
+>
+  <div class="col col-8 p-0 m-0">
+    <div id="register-search-map-text" style="width: 90%; margin-top: 50px">
+      <div
+        class="input-group mb-3"
+        style="
+          border-radius: 15em/15em;
+          background-color: white;
+          box-shadow: 2px 2px 10px black;
+        "
+      >
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search your spot"
+          style="
+            font-size: xx-large;
+            background-color: transparent;
+            border: none;
+            outline: none;
+          "
+          [(ngModel)]="searchString"
+          (keyup)="searchStart()"
+          #searchBar
+        />
+      </div>
+
+      <div class="list-group" *ngIf="searching">
+        <li
+          class="list-group-item list-group-item-action"
+          *ngFor="let result of searchResults"
+          (click)="locateDestination(result)"
+        >
+          <p *ngIf="result.name" class="search-heading">{{ result.name }}</p>
+          <p [class]="result.name ? 'search-sub-heading' : 'search-heading'">
+            {{ result.address }}
+          </p>
+        </li>
+      </div>
+    </div>
+
+    <div class="w-100" style="height: calc(100vh)">
+      <div
+        id="register-spot-search-map"
+        style="height: 100%; width: 100%; margin: auto"
+      ></div>
+    </div>
+
+    <div
+      id="renter-map-legend"
+      style="
+        padding: 30px;
+        margin: 30px;
+        background-color: white;
+        font-size: 1.2em;
+        box-shadow: 0px 0px 5px black;
+        border-radius: 5px;
+      "
+    >
+      <div class="my-3">
+        <img src="assets/icons/location32.png" alt="" />
+        <span>Your Spot</span>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="customer-spot-details"
+    style="
+      background-color: white;
+      box-shadow: 0px 0px 5px black;
+      border-radius: 5px;
+
+      padding: 20px;
+    "
+    class="col col-3 pt-4"
+  >
+    <div *ngIf="!selectedSpot" style="color: gray; padding-top: 50%">
+      <div style="text-align: center; font-size: xx-large">
+        No Spots Selected
+      </div>
+      <div style="text-align: center">
+        <i>Find your spot on the map, and then enter the spot details here</i>
+      </div>
+    </div>
+
+    <div *ngIf="selectedSpot">
+      <div style="border-bottom: 3px solid gold; padding-bottom: 10px">
+        <div style="font-size: 2em; font-weight: bold">Selected Spot</div>
+      </div>
+      <div>
+        <div>
+          <i class="fas fa-map-marked-alt"></i
+          ><span style="font-size: 1.5em; font-weight: bold; margin-left: 10px"
+            >Address</span
+          >
+        </div>
+        <div style="font-size: 1.1em">{{ selectedSpot.address }}</div>
+      </div>
+
+      <form style="margin-top: 25px" [formGroup]="form">
+        <div style="font-size: 1.5em; font-weight: bold">Spot details</div>
+        <div style="color: gray; margin-bottom: 20px">
+          <i
+            >Enter details about the number, type and cost of parking slots in
+            your spot.</i
+          >
+        </div>
+        <div>
+          <mat-checkbox [formControl]="hasTwoWheelers" style="font-size: 1.2em; font-weight: 500" (click)="changeTwoWheelers(!form.value.hasTwoWheelers)"
+            >Can hold Two Wheelers</mat-checkbox
+          >
+          <div *ngIf="form.value.hasTwoWheelers">
+            <mat-form-field appearance="fill">
+              <mat-label>Number of Slots</mat-label>
+              <input formControlName="twoWheelerNum" matInput placeholder="Eg. 5" required/>
+              
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Cost per hour per slot (&#x20b9;)</mat-label>
+              <input formControlName="twoWheelerCost" matInput placeholder="Eg. 600" required/>
+             
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div>
+          <mat-checkbox [formControl]="hasFourWheelers" style="font-size: 1.2em; font-weight: 500" (click)="changeFourWheelers(!form.value.hasFourWheelers)"
+            >Can hold Four Wheelers</mat-checkbox
+          >
+          <div *ngIf="form.value.hasFourWheelers">
+            <mat-form-field appearance="fill">
+              <mat-label>Number of Slots</mat-label>
+              <input formControlName="fourWheelerNum" matInput placeholder="Eg. 5" required/>
+              
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Cost per hour per slot (&#x20b9;)</mat-label>
+              <input formControlName="fourWheelerCost" matInput placeholder="Eg. 600" required/>
+              
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+      <button class="btn btn-success" [disabled]="form.invalid" (click)="confirmDialog()">Register Spot</button>
+    </div>
+  </div>
+</div>

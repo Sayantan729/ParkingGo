@@ -1,0 +1,111 @@
+<div
+  style="
+    font-size: 2em;
+    padding-bottom: 15px;
+    /* border-bottom: 2px solid gold; */
+    font-weight: bold;
+  "
+>
+  Your Spot
+</div>
+<div
+  style="
+    box-shadow: 0px 0px 3px gold;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  "
+>
+  <div style="margin-bottom: 15px">
+    <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 10px">
+      <span
+        style="
+          padding-right: 20px;
+          padding-bottom: 2px;
+          box-shadow: 0px 5px 0px rgba(255, 217, 0, 1);
+        "
+        >Address</span
+      >
+    </div>
+    <div style="font-size: 1.1em">
+      
+      <div>{{ spot.address }}</div>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 15px">
+    <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 10px">
+      <span
+        style="
+          padding-right: 20px;
+          padding-bottom: 2px;
+          box-shadow: 0px 5px 0px rgba(255, 217, 0, 1);
+        "
+        >Slots</span
+      >
+    </div>
+    <div style="font-size: 1.1em">
+      <div *ngIf="spot.twoWheelerNum">
+        <i class="fas fa-motorcycle" style="margin-right: 20px;"></i>
+        <b>{{spot.twoWheelerNum}}</b> slots at <b>&#x20b9; {{spot.twoWheelerCost}}/hr</b> each
+
+      </div>
+      <div *ngIf="spot.fourWheelerNum">
+        <i class="fas fa-car" style="margin-right: 20px;"></i>
+        <b>{{spot.fourWheelerNum}}</b> slots at <b>&#x20b9; {{spot.fourWheelerCost}}/hr</b> each
+          
+    </div>
+    </div>
+  </div>
+
+  <!-- <div style="margin-bottom: 15px">
+    <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 10px">
+      <span
+        style="
+          padding-right: 20px;
+          padding-bottom: 2px;
+          box-shadow: 0px 5px 0px rgba(255, 217, 0, 1);
+        "
+        >Timeslot</span
+      >
+    </div>
+    <div style="font-size: 1.1em">
+      <div>
+        <span style="font-weight: bolder; margin-right: 10px">From:</span
+        ><span style="padding-left: 5px; padding-right: 5px"
+          >25th December, 2020 10:59 am</span
+        >
+      </div>
+      <div>
+        <span style="font-weight: bolder; margin-right: 10px">To:</span
+        ><span style="padding-left: 5px; padding-right: 5px"
+          >25th December, 2020 10:59 pm</span
+        >
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div style="margin-bottom: 15px">
+    <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 10px">
+      <span
+        style="
+          padding-right: 20px;
+          padding-bottom: 2px;
+          box-shadow: 0px 5px 0px rgba(255, 217, 0, 1);
+        "
+        >Cost</span
+      >
+    </div>
+    <div style="font-size: 1.1em">
+      <span style="font-weight: bolder; margin-right: 10px"
+        >&#x20b9; {{ _data.cost }}/hr</span
+      >
+      per slot
+    </div>
+  </div> -->
+</div>
+<div>
+  <button class="btn btn-success mr-3">Confirm Booking</button>
+  <button class="btn btn-danger" (click)="closeDialog()">Cancel</button>
+</div>
+
